@@ -1,0 +1,8 @@
+{
+  "name": "TaskEarn",
+  "description": "A mobile-first reward and task completion platform where users can earn rewards for completing tasks and referring friends.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
