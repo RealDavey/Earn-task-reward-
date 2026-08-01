@@ -37,6 +37,9 @@ export default function Tasks() {
           console.error("AdSense error:", e);
         }
       }, 500);
+    } else if (title.toLowerCase().includes('telegram')) {
+      window.open('https://t.me/+w5WTcNOfjc02OWY8', '_blank');
+      completeTask(taskId);
     } else {
       completeTask(taskId);
     }
@@ -151,11 +154,11 @@ export default function Tasks() {
                 )}
               </div>
               <div className="p-6 aspect-video bg-slate-100 flex flex-col items-center justify-center text-center overflow-hidden">
-                {/* AdSense Ad Block Placeholder */}
+                {/* Earn task */}
                 <ins className="adsbygoogle"
                      style={{ display: 'block', width: '100%', height: '100%' }}
                      data-ad-client="ca-pub-1918660894785188"
-                     data-ad-slot="XXXXXXXXXX"
+                     data-ad-slot="7240913922"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
                 <p className="text-slate-400 text-sm mt-4">AdSense Ad Space</p>
