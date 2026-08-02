@@ -3,6 +3,26 @@ import { useApp } from '../store';
 import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle2, Clock, PlayCircle, ListTodo, X } from 'lucide-react';
 
+const AdSenseUnit = () => {
+  useEffect(() => {
+    try {
+      // @ts-ignore
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+      console.error("AdSense error:", e);
+    }
+  }, []);
+
+  return (
+    <ins className="adsbygoogle"
+         style={{ display: 'block', width: '100%', height: '100%' }}
+         data-ad-client="ca-pub-1918660894785188"
+         data-ad-slot="7240913922"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  );
+};
+
 export default function Tasks() {
   const { tasks, completeTask } = useApp();
   const [activeTab, setActiveTab] = useState<'available' | 'completed'>('available');
@@ -28,15 +48,6 @@ export default function Tasks() {
     if (title.toLowerCase().includes('video') || title.toLowerCase().includes('ad')) {
       setTimeLeft(30);
       setWatchingAdId(taskId);
-      // Attempt to push AdSense ad
-      setTimeout(() => {
-        try {
-          // @ts-ignore
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-          console.error("AdSense error:", e);
-        }
-      }, 500);
     } else if (title.toLowerCase().includes('telegram')) {
       window.open('https://t.me/+w5WTcNOfjc02OWY8', '_blank');
       completeTask(taskId);
@@ -155,12 +166,7 @@ export default function Tasks() {
               </div>
               <div className="p-6 aspect-video bg-slate-100 flex flex-col items-center justify-center text-center overflow-hidden">
                 {/* Earn task */}
-                <ins className="adsbygoogle"
-                     style={{ display: 'block', width: '100%', height: '100%' }}
-                     data-ad-client="ca-pub-1918660894785188"
-                     data-ad-slot="7240913922"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                <AdSenseUnit />
                 <p className="text-slate-400 text-sm mt-4">AdSense Ad Space</p>
                 <p className="text-xs text-slate-400 mt-2">Please wait while the ad plays...</p>
               </div>

@@ -10,9 +10,25 @@ export default function Referrals() {
   if (!user) return null;
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(`https://taskearn.app/invite/${user.referralCode}`);
+    navigator.clipboard.writeText(`https://earn-task-reward.onrender.com/invite/${user.referralCode}`);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const shareLink = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Join TaskEarn',
+          text: 'Get ₦6,500 for joining TaskEarn using my referral link!',
+          url: `https://earn-task-reward.onrender.com/invite/${user.referralCode}`,
+        });
+      } catch (err) {
+        console.error('Share failed', err);
+      }
+    } else {
+      copyToClipboard();
+    }
   };
 
   return (
@@ -41,13 +57,21 @@ export default function Referrals() {
             <p className="text-purple-100 text-xs font-medium mb-2 uppercase tracking-wider">Your Referral Link</p>
             <div className="flex items-center gap-2">
               <div className="flex-1 bg-white/20 px-3 py-2.5 rounded-lg text-sm font-mono truncate border border-white/10">
-                https://taskearn.app/invite/{user.referralCode}
+                https://earn-task-reward.onrender.com/invite/{user.referralCode}
               </div>
               <button 
                 onClick={copyToClipboard}
                 className="w-10 h-10 bg-white text-purple-600 rounded-lg flex items-center justify-center shrink-0 shadow-sm hover:bg-purple-50 transition-colors"
+                title="Copy Link"
               >
                 {copied ? <CheckCircle2 className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+              </button>
+              <button 
+                onClick={shareLink}
+                className="w-10 h-10 bg-white text-purple-600 rounded-lg flex items-center justify-center shrink-0 shadow-sm hover:bg-purple-50 transition-colors"
+                title="Share Link"
+              >
+                <Share2 className="w-5 h-5" />
               </button>
             </div>
           </div>
@@ -65,7 +89,7 @@ export default function Referrals() {
         <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
           <p className="text-slate-500 text-sm font-medium mb-1">Earnings</p>
           <div className="flex items-baseline gap-2">
-            <h3 className="text-3xl font-bold text-green-600">₦12,500</h3>
+            <h3 className="text-3xl font-bold text-green-600">₦{(user.referralCount * 6500).toLocaleString()}</h3>
           </div>
         </div>
       </div>
